@@ -64,7 +64,7 @@ runs:
           "@open-turo/commitlint-config-conventional" \
           "@commitlint/cli"
     - name: Commitlint
-      if: hashFiles(inputs.config-file) != '' && ${{inputs.turo-conventional-commit}}
+      if: hashFiles(inputs.config-file) != '' && inputs.turo-conventional-commit == 'true'
       shell: bash
       run: |
         # Commitlint
@@ -115,7 +115,7 @@ runs:
           --from "$FROM" \
           --to HEAD
     - name: Restore commitlint config
-      if: always() && hashFiles(inputs.config-file) != '' && inputs.turo-conventional-commit
+      if: always() && hashFiles(inputs.config-file) != '' && inputs.turo-conventional-commit == 'true'
       shell: bash
       run: git checkout -- "${{ inputs.config-file }}" || true
     # Collect file changes
